@@ -15,6 +15,7 @@
     const buttons = [rockButton, paperButton, scissorsButton];
     const p = document.createElement("p");
     p.style.whiteSpace = "pre";
+    p.style.textAlign = "center";
     // SELECT OUR DOM ELEMENTS FROM HTML PAGE
     const body = document.querySelector(".body");
 
@@ -46,11 +47,11 @@
     function checkScore (userWinCount, computerWinCount) {
         if(userWinCount == 5) {
             p.textContent += "\r\nUser wins the match!";
-            throw new Error("Game over!");
+            exit;
 ;
         } else if (computerWinCount == 5){
             p.textContent += "\r\nComputer wins the match!";
-            throw new Error("Game over!");
+            exit;
         }
     }
     // get the choice from the player
@@ -74,7 +75,9 @@
                 p.textContent +=`You selected ${user}, and computer chose ${computer}. \r\n`;
                 p.textContent += `User Wins: ${userWinCount}. Computer Wins: ${computerWinCount}.`;
             } else if (winner == "Tie"){
-                p.textContent = `It's a tie! You both picked ${user} please try again! \r\n`;
+                p.textContent = `It's a tie!`
+                p.textContent += '\r\n';
+                p.textContent +=  `You both picked ${user} please try again! \r\n`;
                 p.textContent += `User Wins: ${userWinCount}. Computer Wins: ${computerWinCount}.`;
             }
             results.appendChild(p);
