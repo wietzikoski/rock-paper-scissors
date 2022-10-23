@@ -4,95 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-   <h1>Rock Paper Scissors Console Game</h1> 
-
-   <script>
-    // going to build a rps game against the computer. in order to do so, 
-    // we need to get the computers selection, compare it to our selection to see who wins
-    // keep track of who is winning. first one to five wins
-
-    // get computer selection
-        // 3 choices rock, paper, scissors
-        // needs to be random and you will need to return the choice
-    function getComputerChoice() {
-        // put choices in an array, have computer pick from those choices
-        let choices = ["ROCK", "PAPER", "SCISSORS"];
-        // randomly select one of the choices
-        let choice = choices[Math.floor(Math.random()*choices.length)];
-        return choice;
-    }
-
-    // get the choice from the player
-    let userChoice;
-
-    //games won
-    let userWins = 0;
-    let computerWins = 0;
-    let ties = 0;
-
-    // play a round and return the winner.
-    function playRound(user, computer){
-        if (user === "ROCK" && computer === "SCISSORS"){
-            console.log("Rock beats Scissors! User wins!");
-            userWins++;
-            return userWins;
-
-        } else if         
-        (user === "ROCK" && computer === "ROCK"){
-            console.log("TIE: You both picked Rock");
-            ties++;
-        } else if 
-        (user === "ROCK" && computer === "PAPER") {
-            console.log ("Rock loses to Paper! Computer Wins!");
-            computerWins++;
-            return computerWins;
-        }
-        else if 
-        (user === "PAPER" && computer === "SCISSORS"){
-            console.log("Paper loses to Scissors! Computer Wins!")
-            computerWins++;
-            return computerWins;
-        } else if         
-        (user === "PAPER" && computer === "ROCK"){
-            console.log("Paper beats Rock! User Wins!");
-            userWins++;
-            return userWins;
-        } else if 
-        (user === "PAPER" && computer === "PAPER") {
-            console.log ("TIE: You both picked Paper");
-            ties++;
-        }
-        else if 
-        (user === "SCISSORS" && computer === "SCISSORS"){
-            console.log("TIE: You both picked Scissors");
-            ties++;
-        } else if         
-        (user === "SCISSORS" && computer === "ROCK"){
-            console.log("Scissors loses to Rock! Computer Wins!");
-            computerWins++;
-            return computerWins;
-        } else if 
-        (user === "SCISSORS" && computer === "PAPER") {
-            console.log ("USER WINS!");
-            userWins++;
-            return userWins;
-        }
-    }
-    
-    // we will play a round of 5 
-    function game() {
-    for(i = 1; i<= 5; i++) {
-        userChoice = prompt("Please make a selection: Rock, Paper, or Scissors");
-        userChoice = userChoice.toUpperCase();
-        playRound(userChoice, getComputerChoice());
-        console.log(`User Wins: ${userWins}. Computer Wins: ${computerWins}. TIES: ${ties}`);
-        }
-    }
-
-    game();
-   </script>
+    <header class="header">
+        <h1>Rock Paper Scissors</h1>
+    </header>
+    <div class="body">
+        <div class="intro">
+            <p>We're playing Rock, Paper, Scissors. To play a game, click on a button to see if you win. First to 5 wins!</p>
+        </div>
+          <div class="btn-section">
+            <button class="button" id="rockButton">ROCK</button>
+            <button class="button" id="paperButton">PAPER</button>
+            <button class="button" id="scissorsButton">SCISSORS</button>
+          </div>
+          <div class="results">
+            
+          </div>
+    </div>  
 </body>
 </html>
