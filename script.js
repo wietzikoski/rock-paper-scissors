@@ -46,16 +46,23 @@
         let choice = choices[Math.floor(Math.random()*choices.length)];
         return choice;
     }
-
+    // check to see if score is 5, then we stop the game
+    function stopGame(userWinCount, computerWinCount){
+        if (userWinCount > 4 || computerWinCount > 4){
+            buttons.forEach((button) =>{
+                button.disabled = true;
+            })
+        }
+    }
     function checkScore (userWinCount, computerWinCount) {
         if(userWinCount == 5) {
             p.textContent += "\r\nUser wins the match!";
-            exit;
+            
 ;
         } else if (computerWinCount == 5){
             p.textContent += "\r\nComputer wins the match!";
-            exit;
         }
+        stopGame(userWinCount, computerWinCount);
     }
     // get the choice from the player
     let userChoice;
