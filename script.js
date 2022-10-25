@@ -15,7 +15,7 @@
 
     const buttons = [rockButton, paperButton, scissorsButton];
     const p = document.createElement("p");
-    p.style.whiteSpace = "pre";
+    p.style.whiteSpace = "pre-wrap";
     p.style.textAlign = "center";
     // SELECT OUR DOM ELEMENTS FROM HTML PAGE
     const body = document.querySelector(".body");
@@ -51,6 +51,7 @@
         if (userWinCount > 4 || computerWinCount > 4){
             buttons.forEach((button) =>{
                 button.disabled = true;
+                button.classList.add("disabled");
             })
         }
     }

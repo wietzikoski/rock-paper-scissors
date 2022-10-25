@@ -51,6 +51,9 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-end;
+  color: var(--cream);
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .game {
   width: 100%;
@@ -80,4 +83,9 @@ body {
   background-color: var(--bblue);
   color: var(--nyanza);
   cursor: pointer;
+}
+.disabled, .disabled:hover{
+  background-color: var(--cream);
+  color: var(--umber);
+  cursor: not-allowed;
 }
