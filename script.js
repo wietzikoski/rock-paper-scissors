@@ -9,8 +9,9 @@
     const rockButton = document.querySelector("#rockButton");
     const paperButton = document.querySelector("#paperButton");
     const scissorsButton = document.querySelector("#scissorsButton");
-
-    const results = document.querySelector(".results");
+    const playerScore = document.querySelector(".playerScore");
+    const computerScore = document.querySelector(".computerScore");
+    const results = document.querySelector(".game");
 
     const buttons = [rockButton, paperButton, scissorsButton];
     const p = document.createElement("p");
@@ -22,9 +23,11 @@
     // add Event Listeners to our buttons
     buttons.forEach((button) =>{
         button.addEventListener('click', () => {
+        // get the user
         let userPick = button.textContent;
 
          console.log("Button Clicked!");
+         // play Round when user clicks the button
          playRound(userPick, getComputerChoice());
         });
     })
@@ -62,26 +65,29 @@
     let computerWinCount = 0;
     let tiesCount = 0;
 
-        // display results function 
-        function displayResults(userWinCount, computerWinCount, winner, user, computer) {
-            if (winner == "User"){
-                p.textContent = "You win!";
-                p.textContent += '\r\n';
-                p.textContent +=`You selected ${user}, and computer chose ${computer}. \r\n`;
-                p.textContent += `User Wins: ${userWinCount}. Computer Wins: ${computerWinCount}.`;
-            } else if (winner == "Computer"){
-                p.textContent = "Computer wins!";
-                p.textContent += '\r\n';
-                p.textContent +=`You selected ${user}, and computer chose ${computer}. \r\n`;
-                p.textContent += `User Wins: ${userWinCount}. Computer Wins: ${computerWinCount}.`;
-            } else if (winner == "Tie"){
-                p.textContent = `It's a tie!`
-                p.textContent += '\r\n';
-                p.textContent +=  `You both picked ${user} please try again! \r\n`;
-                p.textContent += `User Wins: ${userWinCount}. Computer Wins: ${computerWinCount}.`;
-            }
-            results.appendChild(p);
-    }   
+    // display results function 
+    function displayResults(userWinCount, computerWinCount, winner, user, computer) {
+        playerScore.textContent = `Player: ${userWinCount}`;
+        computerScore.textContent = `Computer: ${computerWinCount}`;
+        
+        if (winner == "User"){
+            p.textContent = "You win!";
+            p.textContent += '\r\n';
+            p.textContent +=`You selected ${user}, and computer chose ${computer}. \r\n`;
+            
+        } else if (winner == "Computer"){
+            p.textContent = "Computer wins!";
+            p.textContent += '\r\n';
+            p.textContent +=`You selected ${user}, and computer chose ${computer}. \r\n`;
+            
+        } else if (winner == "Tie"){
+            p.textContent = `It's a tie!`
+            p.textContent += '\r\n';
+            p.textContent +=  `You both picked ${user} please try again! \r\n`;
+            
+        }
+        results.appendChild(p);
+}   
     // play a round and return the winner.
     function playRound(user, computer){
         let winner;
