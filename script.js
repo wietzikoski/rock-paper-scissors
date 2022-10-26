@@ -33,7 +33,6 @@
          console.log("Button Clicked!");
          // play Round when user clicks the button
          playRound(userPick, getComputerChoice());
-         tiesCount++;
          stopGame(userWinCount, computerWinCount);
         });
     })
