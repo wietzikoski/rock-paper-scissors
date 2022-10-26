@@ -16,10 +16,6 @@
         //games won
     let userWinCount = 0;
     let computerWinCount = 0;
-    let tiesCount = 0;
-    let winner = '';
-
-
 
     const buttons = [rockButton, paperButton, scissorsButton];
     const p = document.createElement("p");
@@ -42,8 +38,6 @@
         });
     })
     
-
-   
     // add button to dom
     
     // get computer selection
