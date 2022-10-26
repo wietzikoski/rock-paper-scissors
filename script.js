@@ -13,6 +13,14 @@
     const computerScore = document.querySelector(".computerScore");
     const results = document.querySelector(".game");
 
+        //games won
+    let userWinCount = 0;
+    let computerWinCount = 0;
+    let tiesCount = 0;
+    let winner = '';
+
+
+
     const buttons = [rockButton, paperButton, scissorsButton];
     const p = document.createElement("p");
     p.style.whiteSpace = "pre-wrap";
@@ -29,6 +37,8 @@
          console.log("Button Clicked!");
          // play Round when user clicks the button
          playRound(userPick, getComputerChoice());
+         tiesCount++;
+         stopGame(userWinCount, computerWinCount);
         });
     })
     
@@ -47,14 +57,34 @@
         return choice;
     }
     // check to see if score is 5, then we stop the game
-    function stopGame(userWinCount, computerWinCount){
-        if (userWinCount > 4 || computerWinCount > 4){
+    function stopGame(){
+        if (userWinCount > 4 || computerWinCount > 4) {
             buttons.forEach((button) =>{
                 button.disabled = true;
                 button.classList.add("disabled");
+                userWinCount = 0;
+                computerWinCount = 0;
+            })
+            // add a play again button
+            const playAgainButton = document.createElement("button");
+            playAgainButton.classList.add("button");
+            playAgainButton.classList.add("again");
+            playAgainButton.textContent = "Play again?";
+            results.appendChild(playAgainButton);
+            playAgainButton.addEventListener('click', () =>{
+                playerScore.textContent = 'Player: 0';
+                computerScore.textContent = 'Computer: 0';
+                buttons.forEach((button) =>{
+                    button.disabled = false;
+                    button.classList.remove("disabled");
+                });
+                p.textContent = "";
+                playAgainButton.remove();
             })
         }
     }
+
+    // check the score of the game, if it's 5 stop the game
     function checkScore (userWinCount, computerWinCount) {
         if(userWinCount == 5) {
             p.textContent += "\r\nUser wins the match!";
@@ -63,15 +93,10 @@
         } else if (computerWinCount == 5){
             p.textContent += "\r\nComputer wins the match!";
         }
-        stopGame(userWinCount, computerWinCount);
     }
     // get the choice from the player
     let userChoice;
 
-    //games won
-    let userWinCount = 0;
-    let computerWinCount = 0;
-    let tiesCount = 0;
 
     // display results function 
     function displayResults(userWinCount, computerWinCount, winner, user, computer) {
@@ -99,59 +124,29 @@
     // play a round and return the winner.
     function playRound(user, computer){
         let winner;
-        if (user === "ROCK" && computer === "SCISSORS"){
-            winner = "User";
-            userWinCount++;
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-            checkScore(userWinCount, computerWinCount);
-        } else if         
-        (user === "ROCK" && computer === "ROCK"){
-            tiesCount++;
-            winner = "Tie";
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-        } else if 
-        (user === "ROCK" && computer === "PAPER") {
-            computerWinCount++;
-            winner = "Computer";
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-            checkScore(userWinCount, computerWinCount);
-        }
-        else if 
-        (user === "PAPER" && computer === "SCISSORS"){
-            computerWinCount++;
-            winner = "Computer";
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-            checkScore(userWinCount, computerWinCount);
-        } else if         
-        (user === "PAPER" && computer === "ROCK"){
-            userWinCount++;
-            winner = "User";
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-            checkScore(userWinCount, computerWinCount);
-        } else if 
-        (user === "PAPER" && computer === "PAPER") {
-            tiesCount++;
-            winner = "Tie";
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-            checkScore(userWinCount, computerWinCount);
-        }
-        else if 
-        (user === "SCISSORS" && computer === "SCISSORS"){
-            tiesCount++;
-            winner = "Tie";
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-        } else if         
-        (user === "SCISSORS" && computer === "ROCK"){
-            computerWinCount++;
-            winner = "Computer";
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-            checkScore(userWinCount, computerWinCount);
-        } else if 
-        (user === "SCISSORS" && computer === "PAPER") {
-            userWinCount++;
-            winner = "User";
-            displayResults(userWinCount, computerWinCount, winner, user, computer);
-            checkScore(userWinCount, computerWinCount);
+        if (
+            (user === "ROCK" && computer === "SCISSORS") || 
+            (user === "PAPER" && computer === "ROCK") || 
+            (user === "SCISSORS" && computer === "PAPER")) {
+                winner = "User";
+                userWinCount++;
+                displayResults(userWinCount, computerWinCount, winner, user, computer);
+                checkScore(userWinCount, computerWinCount);
+        } else if (
+            (user === "ROCK" && computer === "ROCK") || 
+            (user === "PAPER" && computer === "PAPER") || 
+            (user === "SCISSORS" && computer === "SCISSORS")) {
+                tiesCount++;
+                winner = "Tie";
+                displayResults(userWinCount, computerWinCount, winner, user, computer);
+        } else if (
+            (user === "ROCK" && computer === "PAPER") || 
+            (user === "PAPER" && computer === "SCISSORS") || 
+            (user === "SCISSORS" && computer === "ROCK")){
+                computerWinCount++;
+                winner = "Computer";
+                displayResults(userWinCount, computerWinCount, winner, user, computer);
+                checkScore(userWinCount, computerWinCount);
         }
     }
     
