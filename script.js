@@ -19,8 +19,11 @@
 
     const buttons = [rockButton, paperButton, scissorsButton];
     const p = document.createElement("p");
+    const result = document.createElement('p');
+    result.classList.add('big');
     p.style.whiteSpace = "pre-wrap";
     p.style.textAlign = "center";
+    p.style.marginBottom = "10px";
     // SELECT OUR DOM ELEMENTS FROM HTML PAGE
     const body = document.querySelector(".body");
 
@@ -71,6 +74,7 @@
                     button.disabled = false;
                     button.classList.remove("disabled");
                 });
+                result.textContent = '';
                 p.textContent = "";
                 playAgainButton.remove();
             })
@@ -97,21 +101,19 @@
         computerScore.textContent = `Computer: ${computerWinCount}`;
         
         if (winner == "User"){
-            p.textContent = "You win!";
-            p.textContent += '\r\n';
-            p.textContent +=`You selected ${user}, and computer chose ${computer}. \r\n`;
+            result.textContent = "You win!";
+            p.textContent =`You selected ${user}, and computer chose ${computer}. \r\n`;
             
         } else if (winner == "Computer"){
-            p.textContent = "Computer wins!";
-            p.textContent += '\r\n';
-            p.textContent +=`You selected ${user}, and computer chose ${computer}. \r\n`;
+            result.textContent = "Computer wins!";
+            p.textContent =`You selected ${user}, and computer chose ${computer}. \r\n`;
             
         } else if (winner == "Tie"){
-            p.textContent = `It's a tie!`
-            p.textContent += '\r\n';
-            p.textContent +=  `You both picked ${user} please try again! \r\n`;
+            result.textContent = `It's a tie!`;
+            p.textContent =  `You both picked ${user} please try again! \r\n`;
             
         }
+        results.appendChild(result);
         results.appendChild(p);
 }   
     // play a round and return the winner.
@@ -129,7 +131,6 @@
             (user === "ROCK" && computer === "ROCK") || 
             (user === "PAPER" && computer === "PAPER") || 
             (user === "SCISSORS" && computer === "SCISSORS")) {
-                tiesCount++;
                 winner = "Tie";
                 displayResults(userWinCount, computerWinCount, winner, user, computer);
         } else if (
